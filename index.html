@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="التقويم الدراسي 1448: توزيع الأسابيع الدراسية والإجازات بالهجري والميلادي، الأسبوع الحالي، وطباعة وإضافة لتقويم الجوال — من متجر مجودة.">
+<title>التقويم الدراسي ١٤٤٨ — مجودة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Alexandria:wght@600;700;800&display=swap">
+<style>
+:root{
+  --ink:#0b3d40; --muted:#5b7476; --line:#d9e6e6; --paper:#f5f9f8; --card:#ffffff;
+  --teal:#0a6d73; --teal-2:#16787c; --teal-soft:#e3f1f0; --must:#c9891f; --must-soft:#fbf1df;
+  --hol:#b4413a; --hol-soft:#fbe9e7; --nat:#1f7a43; --nat-soft:#e4f4ea;
+  --f-display:"Alexandria","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --f-body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,"Geeza Pro",sans-serif; --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ink:#e4efee; --muted:#9db3b2; --line:#24393a; --paper:#0d1717; --card:#132222;
+  --teal:#4fb7b5; --teal-2:#6cc9c6; --teal-soft:#16302f; --must:#e6ac4a; --must-soft:#2c2414;
+  --hol:#e7837a; --hol-soft:#341b19; --nat:#5fcc8a; --nat-soft:#132b1e; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --ink:#e4efee; --muted:#9db3b2; --line:#24393a; --paper:#0d1717; --card:#132222;
+  --teal:#4fb7b5; --teal-2:#6cc9c6; --teal-soft:#16302f; --must:#e6ac4a; --must-soft:#2c2414;
+  --hol:#e7837a; --hol-soft:#341b19; --nat:#5fcc8a; --nat-soft:#132b1e; color-scheme:dark;}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7;margin:0}
+.app{direction:rtl;max-width:1120px;margin:0 auto;padding:0 16px 56px}
+h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.4}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--teal-2);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);margin:0 -16px;padding:12px 16px}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mark{width:40px;height:40px;border-radius:11px;background:var(--teal);color:#fff;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;flex:none}
+.brand h1{font-size:19px}.brand small{display:block;color:var(--muted);font-size:12px}
+.spacer{flex:1}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:7px 14px;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--teal)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.on{border-color:var(--nat);color:var(--nat)}
+.btn.small{padding:4px 10px;font-size:13px}
+.tabs{display:flex;gap:4px;margin-top:10px;overflow-x:auto}
+.tab{border:0;background:transparent;padding:8px 14px;border-radius:9px;cursor:pointer;color:var(--muted);white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--teal-soft);color:var(--teal);font-weight:600}
+.view{margin-top:20px}
+.lead{color:var(--muted);margin:4px 0 16px}
+/* now card */
+.now{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.stat small{color:var(--muted);display:block;font-size:13px}
+.stat b{font-family:var(--f-display);font-size:26px;display:block;line-height:1.35}
+.stat span{color:var(--muted);font-size:13px}
+.stat.hero{background:var(--teal);border-color:var(--teal);color:#fff}.stat.hero small,.stat.hero span{color:rgba(255,255,255,.85)}
+/* weeks table */
+.term{margin-top:22px}
+.term h2{font-size:18px;display:flex;align-items:center;gap:10px}
+.term h2 .pill{font-family:var(--f-body);font-size:12px;font-weight:600;background:var(--teal-soft);color:var(--teal);border-radius:99px;padding:2px 10px}
+table.w{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:10px}
+table.w th,table.w td{padding:9px 12px;text-align:start;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+table.w th{background:var(--teal-soft);color:var(--teal);font-weight:600;font-size:13px}
+table.w tr:last-child td{border-bottom:0}
+table.w td.wk{font-family:var(--f-display);font-weight:700;color:var(--teal);width:70px}
+table.w tr.cur td{background:var(--must-soft)}
+table.w tr.off td{background:var(--hol-soft);color:var(--hol)}
+.tag{display:inline-block;font-size:12px;border-radius:99px;padding:1px 9px;margin:2px 0 2px 4px;font-weight:600}
+.tag.h{background:var(--hol-soft);color:var(--hol)}.tag.n{background:var(--nat-soft);color:var(--nat)}.tag.m{background:var(--must-soft);color:var(--must)}
+.hd{color:var(--muted);font-size:12.5px;display:block}
+/* months */
+.months{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.mon{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.mon h3{font-size:15px;display:flex;justify-content:space-between;gap:8px}
+.mon h3 small{font-family:var(--f-body);font-weight:500;color:var(--muted);font-size:12px}
+.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-top:8px;text-align:center}
+.grid7 .dn{font-size:11px;color:var(--muted)}
+.d{border-radius:8px;padding:3px 0;font-size:13px;line-height:1.2;min-height:38px}
+.d i{display:block;font-style:normal;font-size:10px;color:var(--muted)}
+.d.we{color:var(--muted)}
+.d.h{background:var(--hol-soft);color:var(--hol)}.d.n{background:var(--nat-soft);color:var(--nat)}.d.m{background:var(--must-soft);color:var(--must)}
+.d.today{outline:2px solid var(--teal);outline-offset:-2px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:6px 0 14px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:4px;margin-left:6px;vertical-align:-1px;background:var(--c)}
+/* my events */
+.form{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;align-items:end}
+.form label{font-size:12.5px;color:var(--muted);display:block}
+.form input,.form select{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:7px 10px}
+@media (max-width:640px){.form{grid-template-columns:1fr 1fr}.form .wide{grid-column:1/-1}}
+.list{margin-top:12px;display:grid;gap:8px}
+.ev{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.ev b{flex:1}
+.empty{color:var(--muted);text-align:center;padding:26px;border:1px dashed var(--line);border-radius:var(--r)}
+/* activation */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-top:16px}
+.panel form{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.panel input{flex:1;min-width:200px;border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:8px 12px;direction:ltr;text-align:left}
+.msg{font-size:13.5px;margin-top:8px}.msg.ok{color:var(--nat)}.msg.err{color:var(--hol)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:9px 18px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:50}
+.toast.show{opacity:1}
+.src{font-size:12.5px;color:var(--muted);margin-top:18px}
+.print-only{display:none}
+/* print */
+@page{size:A4;margin:12mm}
+@media print{
+  body{background:#fff;color:#000;font-size:11px}
+  .top,.view,.toast,.panel,.no-print{display:none!important}
+  .print-only{display:block}
+  .pp{page-break-after:always;direction:rtl}
+  .pp:last-child{page-break-after:auto}
+  .ph{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #0a6d73;padding-bottom:6px;margin-bottom:8px}
+  .ph h1{font-size:18px;color:#0a6d73}.ph small{color:#555}
+  table.pw{width:100%;border-collapse:collapse}
+  table.pw th,table.pw td{border:1px solid #c9d9d9;padding:1.6px 5px;font-size:9.4px;line-height:1.45;text-align:start}
+  table.pw th{background:#e3f1f0;color:#0a6d73}
+  table.pw tr.off td{background:#fbe9e7;color:#9a2f28}
+  table.pw td.tm{background:#0a6d73;color:#fff;font-weight:700;text-align:center}
+  .pm{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .pm .mon{border:1px solid #c9d9d9;border-radius:6px;padding:5px;break-inside:avoid}
+  .pm .mon h3{font-size:11px;color:#0a6d73}
+  .pm .d{min-height:22px;font-size:9px;padding:1px 0}.pm .d i{font-size:7px}
+  .pm .d.h{background:#fbe9e7}.pm .d.n{background:#e4f4ea}.pm .d.m{background:#fbf1df}
+  .wm{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;font-size:90px;color:rgba(10,109,115,.10);transform:rotate(-30deg);font-family:var(--f-display);pointer-events:none}
+  .pfoot{font-size:9px;color:#666;margin-top:6px;display:flex;justify-content:space-between}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="row">
+  <div class="brand row"><div class="mark">١٤٤٨</div><div><h1>التقويم الدراسي ١٤٤٨هـ</h1><small>توزيع الأسابيع · الإجازات · هجري وميلادي</small></div></div>
+  <div class="spacer"></div>
+  <button class="btn" id="btnIcs">إضافة لتقويم الجوال</button>
+  <button class="btn primary" id="btnPrint">طباعة</button>
+  <button class="btn" id="btnAct">تفعيل</button>
+ </div>
+ <nav class="tabs" role="tablist">
+  <button class="tab" role="tab" data-v="now" aria-selected="true">اليوم</button>
+  <button class="tab" role="tab" data-v="weeks" aria-selected="false">توزيع الأسابيع</button>
+  <button class="tab" role="tab" data-v="months" aria-selected="false">التقويم الشهري</button>
+  <button class="tab" role="tab" data-v="mine" aria-selected="false">مواعيدي</button>
+ </nav>
+</header>
+
+<div class="panel" id="actPanel" hidden>
+ <h2 style="font-size:17px">تفعيل الطباعة والتصدير</h2>
+ <p class="lead" style="margin:4px 0 0">التصفّح مجاني. بعد الشراء يصلك كود يبدأ بـ CAL، الصقه هنا لتفعيل الطباعة وإضافة الإجازات لتقويم جوالك.</p>
+ <form id="actForm"><input id="actCode" placeholder="CAL-XXXX-XXXX" autocomplete="off"><button class="btn primary">تفعيل</button><button type="button" class="btn" id="actClose">إغلاق</button></form>
+ <div class="msg" id="actMsg"></div>
+</div>
+
+<section class="view" id="v-now"></section>
+<section class="view" id="v-weeks" hidden></section>
+<section class="view" id="v-months" hidden></section>
+<section class="view" id="v-mine" hidden>
+ <h2 style="font-size:18px">مواعيدي</h2>
+ <p class="lead">أضف اختباراتك ومواعيد التسليم والاجتماعات، فتظهر في التقويم والطباعة وملف تقويم الجوال. تُحفظ في جهازك فقط.</p>
+ <form class="form" id="evForm">
+  <div class="wide"><label for="evT">الموعد</label><input id="evT" required maxlength="60" placeholder="مثال: اختبار الفترة — الصف الثالث"></div>
+  <div><label for="evD">التاريخ</label><input id="evD" type="date" required></div>
+  <div><label for="evK">النوع</label><select id="evK"><option value="m">موعد</option><option value="x">اختبار</option><option value="t">تسليم</option></select></div>
+  <button class="btn primary">إضافة</button>
+ </form>
+ <div class="list" id="evList"></div>
+</section>
+<p class="src no-print" id="srcNote"></p>
+</div>
+<div class="print-only" id="printArea"></div>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+"use strict";
+/* ===== بيانات العام الدراسي — تُملأ من التقويم الرسمي لوزارة التعليم ===== */
+var CAL={"title": "العام الدراسي ١٤٤٨هـ (٢٠٢٦–٢٠٢٧)", "source": "التقويم الدراسي المعتمد من وزارة التعليم للتعليم العام (فصلان دراسيان) كما نشرته عكاظ وأرقام والمدينة. إدارات مكة والمدينة وجدة والطائف لها تقويم مستثنى، والإجازات الإضافية تختلف حسب المنطقة", "yearStart": "2026-08-01", "yearEnd": "2027-06-30", "terms": [{"name": "الفصل الدراسي الأول", "start": "2026-08-23", "end": "2027-01-07"}, {"name": "الفصل الدراسي الثاني", "start": "2027-01-17", "end": "2027-06-24"}], "breaks": [{"name": "إجازة اليوم الوطني", "from": "2026-09-23", "to": "2026-09-26"}, {"name": "إجازة الخريف", "from": "2026-11-20", "to": "2026-11-28"}, {"name": "إجازة منتصف العام", "from": "2027-01-08", "to": "2027-01-16"}, {"name": "إجازة يوم التأسيس", "from": "2027-02-19", "to": "2027-02-22"}, {"name": "إجازة عيد الفطر", "from": "2027-02-26", "to": "2027-03-13"}, {"name": "إجازة عيد الأضحى", "from": "2027-05-07", "to": "2027-05-22"}, {"name": "إجازة نهاية العام", "from": "2027-06-25", "to": "2027-08-21"}], "days": [{"date": "2026-08-11", "name": "عودة الإداريين", "kind": "m"}, {"date": "2026-08-16", "name": "عودة المعلمين", "kind": "m"}, {"date": "2026-08-23", "name": "بداية الدراسة", "kind": "m"}, {"date": "2026-09-23", "name": "اليوم الوطني", "kind": "n"}, {"date": "2026-10-05", "name": "يوم المعلم", "kind": "n"}, {"date": "2026-10-25", "name": "إجازة إضافية (الرياض والقصيم)", "kind": "m"}, {"date": "2026-11-29", "name": "إجازة إضافية (الرياض والقصيم)", "kind": "m"}, {"date": "2027-01-07", "name": "إجازة إضافية (الرياض والقصيم)", "kind": "m"}, {"date": "2027-01-17", "name": "بداية الفصل الثاني", "kind": "m"}, {"date": "2027-02-08", "name": "بداية رمضان (تقريبي)", "kind": "m"}, {"date": "2027-02-22", "name": "يوم التأسيس", "kind": "n"}, {"date": "2027-03-09", "name": "عيد الفطر (تقريبي)", "kind": "n"}, {"date": "2027-03-11", "name": "يوم العلم", "kind": "n"}, {"date": "2027-04-11", "name": "إجازة إضافية (الرياض والقصيم)", "kind": "m"}, {"date": "2027-05-16", "name": "عيد الأضحى (تقريبي)", "kind": "n"}, {"date": "2027-06-06", "name": "رأس السنة الهجرية ١٤٤٩", "kind": "m"}, {"date": "2027-06-24", "name": "نهاية العام الدراسي", "kind": "m"}]};
+var HASHES=["b3d820f8ee32491e932f183a015f71c2bedc8eda138492a8ce4ba6bd263dd30e", "da268803efe05cb2ab892358ce544c569e6a078f2105e36509aef3b4538de6e1", "ff67780e6f845cf59e97c2dc7f4a2b94823e26e529552f2d73ba51fe5c8736a5", "2e33886afc45a1db7f064ceb49f2bd8ed22c7cc1563229a3871d2ec1f53ed42c", "bc2ba288873952424085016d62c554bc1c149111895cf77f6a104b7867c1da1a", "48aa1105516e4a6812bd64a2f15301e094e0c0da138b0303480cebfa697c0220", "c600752f89ca0cafc9ff75deb414d01d2d3d98f06c0410be21c303a109019dca", "f1e8ce1e7100b91a3ffa45c4718a56452632ec8ea97dfdf8f1b680afbb05cd89", "f6fd685146c1a6d7c8ea1c31c130014513c45e0900817e69b81890de2d3a2062", "ab6f9ace334288b73b7db6611481fb81d06969ad4e7dd179a5a2ad0b2d17f2b1", "f4482b600d2ac98db3b97b29106490f073e357ec5786255252580f0f78818c7a", "3745dca0fb2be8a35909cadd3ab19b9fd054236249349a5565543a452561d1c0", "2e95bf24045e5f46219bde4a3b481bd90fc35aee592e4aa4a9ff827b702b41af", "214bb4766f21e1fe5245f9c0c8c105227bb0aae6f1cea50c900983143cdc8d83", "07f0437f9ad4c8835746edc5ee21fa8c4bc742e6e6a1b296e7fec568fd3096bc", "e75af471d49736a15f2aa0278f70840f2728aa0ff3bf4383bf902695d079c094", "9838cbe610f08f56e0a4dac161211d6f94bcc9a2b7d86f5419d534fb2376162a", "e3ed6c28163a8e6d81f9ded6ed8fd3cf05af0bd69a2f926133aca3a2ff412d38", "6b624624f158885eada736285ba2873353f7130feae913b88501664379a3dd9d", "dd78390d4a2139e760049c9cc0643e7379af535851ea21765ae3dc1ea0e1df2e", "2e20ad938e2ecb62d336f27a627d3ab804b79919fbfb2a0c863d42440fb24344", "bc8064e8795985ee3b1102b46c5a0812fe43ac17eabe885cfdefa5dcff9a6403", "e8825c454dedcc021773738cc7fffa303546935536a92795c3d39ee9c4121450", "4f4d9031762d73c5b5fa44072c81a4e1940d456ae8a7b84f89962cdb654353d9", "779d81c2da721295bf352f330c8a914b9e4635e3f02acef133cca2288afb2bcc", "28c0f84c26782e084e06f610fc5665904ae6fab8d35f806efdbbe2a946d942ac", "5009ae97ca2dc67c0149569889b60b63057475432a63188761f7ac9188fc2fcd", "a4ff228421e9058cef46d62f279d6540fa2a6fa41e3d6cb1945b14b3bea28cfb", "1320de09e78af5c5bfcf4bf35514f188a220fce5463017be071f0290c39d7d93", "e0ea3d6adaa31fab6fa82646c2b7745525d5bd46bc5918ed814b0ea32a6b54f6", "e5bd46eedc0c1180a99adebebab7a7a046b67fd93232dfef8d671f147fb2eef4", "afa9d3b1927b1d53f9b6890bf3119bbf0432196cd8c53f66502c8ee63c179d72", "7f7616f219a50a4b61b643fba71e46eb11782092f2117ff37717928b5a36fcaf", "6449f5054bf9de3092c558d7b8d3cee40ae23299ab56031f7e19482665053a2e", "19e0e54aae9f0af9e7073acf6c5f0bf909fac6d5e8b6e512dee7acf8450702e9", "455dc01a4330658b5d0462aff080e6c16539b8c4d2c0935d89cefd01ed08a38a", "7451c16e58fec12f7acb771b746366b29e74ca89cb374266292e202ac1fce685", "e58c52702dbfd45983f054006c7668dfe4cb84c53789c26b758901cefa8a3262", "07fae779dbaa403c80f5d9d7b6bc14cce2ddbfaca4e7429107b0ec339b922c03", "a036af16170d39fd9be29a50faf7737b87205f9bfcf5073d07cc0ebbdb8ff89e", "9e37c15960e9c2f5646b01d5b9a20a0da2c5cf54dc731fb0ec8197438b1f6b7a", "424a10cb2e4b62b88262ad99bdf1cb6eb436714406361a1d6a01edfce48e8d3e", "7642fecca481e86471314a1c2be551a5a16ecc74c7731a67c8a471ba8eb80a26", "6d8a181fb54c3643acc04d5ade35c1b6435b125e81c570e98d9ff1099734de80", "cdd56b10d481190efd4b6b9b1251f7f58d640316fb9789c58a19567948c7f1ec", "bf7f0bd7ad972c2606400637d50934edbea3fcec30432aa209aa1a1aeab90a9e", "f1caed6c1e0961c30d82329ea8c047a46d059a9ce2ebec5a323b7768c265344e", "4f815c55e11fddd2e9561616dd1308fa888f7caaf4e56740ee15a656ddbb91de", "d1bdecb814fa0f897d249f31a50b1b1cd4f66e74a6bcc88527d4bb163b6ab989", "3d78bf739c6cd906695d383b96a5e8eb209ffd164180f5926b3a040df89da583", "7260d1ceff2605092edb415516a073cba9db7ae6bc7a8600119cec7bce433757", "cb30b9092a36310aa154356537e89362586aae4c2d9d623a1917698472ab7f7d", "53e60eb40ac9a7854c080eddf7626f02b5210df6feb387fa1ab57a81ef1182cc", "d46644a62f1da503554f48ddf55539995da8f1e52bc0b901f7b4444505a8a6f4", "a39ae3c80a45a22ac24ee677649f435a5950959e56480908af9a91e25b9a9539", "123cb49c5486bdfbfb1c26fb4013baab55e5f3a1b8602a274e315af1b26a3c59", "f060531354edef1901302b95b4f03509c9badeed4dc61ba43e8580d826b11b92", "2549ce35bcf320d2b5e93cc511643b4133ce0351a93b448503686095348a28dd", "fda51f5800d8a2c6cf01da033478bb94297763a575804c28539aa29f02b3c7e9", "9f5f7bb01271a50955b87c0a46ef257d080084bc2168516aec613b193855ace3", "0b695caee50e5b7d45ee891ff658fa6ee41efbd31b56375194de970ff05fa58d", "90560d284fb98025d44b3f91f9360ce53e447c379d32249d385ebdc7ca5c49b2", "db424b6758133052445d2eb70f2d5a1970940c8bd5d1d12413980b35962f6c89", "d1d6e09ab1387e28dc4ada02fdfc358ef92accb83e20919ac50bc3006b5577a0", "f859a7b9d3d180a25d7fba3d1ceb622d2cefad474f05a8fc526ec5a01f3279d9", "b389db39499065f670b00324cadf58b6a28a095c517d17edf69b557aca5020d6", "55b49826b73d6776ff92808c6700084f7be742869e25f5555983ff5b07993e9c", "4a882b5c0db860296cd437b579d46f9c686deaf4f51be913060fc080da0e6612", "84a168c7361cb493c97c0f48f89f2455e8e8d32f6e63fc5cb7a3424324453de7", "699070e0bd99ccc02f86e7465cf624185e273b33ab681a9eb042605b3cca9066", "bdc2b09a25b9a5fa10e9a079f97733f1e5f84332636e4ee81a270f14adee95ab", "2e551f2d5c4e6970068e19437514474df9a34658db1533400223ebd19b966eb8", "172004adea5bf449792afd0afa67c89f9ede699392c66c1285a9e7193f6fda98", "72e56f928fa83d53397c4a1ef081d239f3d0317559eedd93a5ee6e85880961a1", "291832b286c0286b400280c6b2858c078eca1a82ceb24b9c097bd3db61394c75", "29b900f9ec9113493afac27e9c219c4043637d791c6ea43343c782313fe3edee", "a26a62fffe6301fdaefd20a657a62acdcc2b184836fde7c3b9ebbfb7497c2d6b", "06e6349e2a2fbe920ccca70ae65b6dd0b31bb93f3306cb7db8c4f2378c645410", "90f8edbd01e69449db474f18efecd47ad36bfe00a3308c28503c5a434900e539", "f1f378c694c308f058bb67e66d9c64c00609221321f7375d1dc26fd5e9c5f439", "0d58754a3367c53e3029cff49214a8724515882f4eadf5b11cc7b87163998a89", "8846338ae7259399d4f7b78cd670c8d62269e5fc01bd4a445445f096f7896ce2", "e83cd7a3ac5927f008e83212bd52299f50e484bec5a9c9a9c7bb714526e592aa", "f3aa14a2650c00397d135a176b1375cd02349bc54638d422518590553c65a645", "56382b8f623f2fead4d64f15165a1b67938aadf0cb154b3ce81012d16ea32447", "545744d4123b6bc080dca479feee84002232d413fbf5ec60deb802d3c80c4db9", "ac2455e1a14306a35be2c1678a6cf9c275782ddc1ea35a19176894e3a266dd2f", "fa334009eed6ff88a718279b56587c7b0a81d840d8131a41ff54c413f45b3be6", "b7785632b03e984ddf4fd4289d6896b64fb6cb8fa2dae99392b0760c88637fdc", "ae0522ca89ea6549c2a2a908ca0a49b078971d23497a31c8279a82f6000cf411", "64c210ab11e72ab7c5630b1249a3d47ee03fc9f678b9c715c6dcff594779cdab", "bbd06a66db1f16a5c012d1e9db213b73beea666dc38b30e5f7fb988621704923", "1131e2534001b93b80a36c612ffdc3a702e636b166a943671353a6f714899ea1", "d5fd1d51784a2961385a862dca1c8c815a8468b02b5e401bbd2aa3695ca6a52a", "3a94f79b16757a5f3a33150ac68d0ea756b3ccb1ddd35851b9676323d7435a76", "de6a36b200b863caad0dc2e71052ff5e449e339f6ccf1ba33bbfcaa24c106647", "43e0be3a20db93af36d79b9931e6adcc2828d6f1c84aab18b9244942f84c3e5d", "9e02a165165c79a7c53ee8888c483ad0dc34e42d190494426124a171ebf62538", "059e37f30c4f6ba9bfeeb52994fe8d179141049c8f619da211dccac60dff3c12", "425e4b8986f058b969f02a27cd15f73cd789a194b755b1eb4536299d13513c3d", "18309730f18447084b1e9834a67c0ef149bce399bf47b7d1f30c41f791dd8463", "b2370d572c7fbcaa82713f184ea41c06f8c70f01114b2064b60bd09c985340f4", "4cfc0dea4aa53afaead42eb68401d706def4fd0782d65e6ec89b15a9ca6740ff", "c162521f2d063f450fbacd650b88f7fe336adb9a8d640885bee0033ebbe2f73d", "28b6c5df4f983880595d0d5a559db4c813aa3a51ba1df5eee869ba7a028a572b", "51501b77f1bf55d86cb7d66cefc8a6ca245f895771e3a40c0b5f920a645c0c78", "0fe8281893aa2612cceeb90b2ee4cdf7c6fc9deafd82204d4f2c081660635447", "153e0da79f8cf10f7d5193b701e676828b166b20fd75a5a71096c7bd66e766a6", "ff3a6d81b6fb1e7b7373aacb754cc9e04dd1ea17fffd006cfc301e8b839ba5aa", "b89cabe03f7c0cbabfc94161c70e658514b421bf306b70c02dfb689065eeb4e7", "c99e2c425f021e194fc9f93aca2b17f513913a8973895b7e74b04e2233e1a519", "e17e14a9fc0fa50e7d3c5049648eccb25a7b7f31a96a3fa032486f0ccd0a8c87", "74a6447a38f73ebeb55a30ff0c9d402daefcbb3c5eba8157bfa23750db418228", "ada6bf5bd20ddddbae3fe9bd8c70bf57b42d6d1074babb5282404309193b632d", "7836cb13abaa7fde0a4ece6dc3dd983267cd8924888304f678bdf88be04de5ba", "35ecd45449dc813c7ec109579ce5b695b5eef0147ce1b2d403395ba40c8500ef", "f3155db33cc795f9044cec799f48b81915c0b44e53039ac73adc617ca0e38165", "8172d31c092189e442712a08c2086f81aa08c12d400b0f578cae9059c010faf2", "a8f74a6ebfae81281dc6bdcafeb2a08a022c3e0b6f5fd19602019530c26bd05a", "8f4986facecb6901a9211f2ca101cb6e72898ad4f1ffd1d86b764f87df6fda52", "326f0f176032d9cd8b37bd3588478d54efe67a9fcd5949f863a5743a576c1877", "fe8213918585c66eb3a976ffa337570635212487a32a995dff215445fed4321c", "dce862ce1e874d7a7625978414c13da2b95712fe49d04c0d1cc1a95ed07a76d5", "bec39b505bf8cc28f8647e7451c38b65be12dfe9ec8633639e5508d86d45712b", "bcded3c9d949434e71eea8875d8c4e02ed7efb7885fbdcfb2d92730a37f0047e", "ab509fd70fbed02895ff645a29a1ec06ac135f35f2266f8db1361110d08ea917", "d0602bac4acd8cf1488c060bb4f4f16366cfbf2bbdb187ec12e30322addb317b", "5fa5cccd4b5d0762cf158e6d92ac4120bb49c0e531bba6da3a0750438caa337d", "8f1af2d86e7f8bae52c2503878cf9208e60c09d1f116e03bf1ff337b1267b77a", "5c82129b8a7c4b947dfdfc40f8b380585a96dec089b6b72e5c1f3359d447bcc7", "fd4d8ca15e03ccb1994b6ce77bbb2e2dba06ddda18c62661a7c93b2384e6c712", "dca9faf3b7aa0e44897d749df8d833b2ab9f38e42183c5fde94c982d5a06a544", "258e82369c96ac1451be88c986799accfef9dff484b00fbdcaffeb3e243aba45", "da463e6f4bbb9e610d36bac92d27d08c861627e715b9ab4335a28c43d3bfeb21", "45417148f10c1ca555a008873251fd2997552fd982908c88440968544d2cdccc", "12dd1a9a2d7f6cd738f564d9f372dca2bda2caeb4c85c5593e34aa53b31e1588", "ba1675bd2d0c3ac87294ea28c276b05495767bdce3de2473224f498b5f88173d", "55b38f06b64d97d0c81553647ac8f6b856a2631a5d89d3b1a7e7bf226a88bf86", "2a7c5d8c14947ad8aa2229897a0ae1aa5dcff778f8e526eb7101969f4ff1c2a3", "930bcdab8b894422b6553e42b56e3c76dfeffd3638d2325fc7c3bd6372c796e3", "e7068ebcc0747976fc7cc2bfd3bd12734199effe2547d35c39bc0b2c53b8cb33", "07367f64035fe8575b0b0ee8f2ba1be1c4519c3420b43e03a9d1730ec2f25808", "d220e8b0ec504b370ca9842a31d7ca52267c48cb18534ead877c54076677c375", "7c7c18ea470f0451a9cd212f8cd91b60d744c63a7b6a40c715efa48817881d2d", "aa5a11b5e96f1fca20848e29d4868fb2ca4e0af79ec76eee4aa53257c660acf6", "fac438f4d4de92b316da9d5d654f84d4b5824c40f305f7293c5838c9ae83dc2f", "73775a2b8efcc63162c685377efcbe883150b6ea29560e01b85b6f1c9c9de1e7", "8b7a2c58308ce73b6a2eaaa6665b9431cc0645dbd76b3d821a4bf2aac2af208a", "fe4855062d1a58f3f49fb9feff463b52607a73e097c395da9d929a808ed80b93", "6066e5a9142f2e0883ed0160bec54f4bf07f344cecb311198b59b2a0da223177", "a2fa33788c3b2ff831fb59b17cd3ab87ea082a86c7aadcc447cedac10bfca1df", "014beaf86f2e8affd3b2163bbc83fbbf003ab21d97b7a55e2cf7d5f6c921b617", "be1e98385bc6811d1d480697676e5ed05eb8e85859f29e2c3be527293ae5f3d5", "ad02d59ea4a6071cbd05515143fde9dd523928db8a387d6e92e8e9498582618f", "06a59f6b166f0542b5b5e317d5c2b56cc80f53c8cfe44e1789b609c29001962c", "75fbdf79f2f00e8c2c4cc7d8aaa9c0889d7b1a511fdc6f50c5f7d389822038d9", "705c29c6e6a3ab4e69ee4a3a16b07579abf3ec7090a0d8b9d1434ec3725a4408", "7a4d72c4fae339aef11a828cb80349d5ccda627180df1c8051b7894af3255b19", "be865d9ec5db673c442f5ae7b65a9c6f33c8c907d29fa5deba9b865666a71c5d", "41c56a14aa436c7c73e66581426e35df24453f761fe7f680bd26e468dae00fbf", "be29fa237c430a2a44363d00ea02118076934614683fd0d920e6b5ae50bd5743", "bb3806772fda6e041d93e4e5d316db537548b090df400ae92f42a3e9f2fe60b1", "1c213748e10e9823827e2fc3898768be7891304dba7e6d12b81ab723a43b07a6", "64e47ae7f39ef072b4eaa5ae8b40220af9fbea836d4bb6d06e817257ba01f36f", "3724905e085b552302cc8e3c830314a2a19a27014cffadc67012039aab306da0", "8b5b14416711a78ade461a9b3f503ba0ee1a957c941fd116bc77bb29d3e18748", "c861d1ddd4d6d1e236390aa0a7047bda1b68a9903a84b49899ed56b1a2979281", "58b4a2ec86f6d6fe074807b8ea033f52975e4128ebf325e1b27f601d586c726d", "43c82d1b0db139fd9f54abd72e1a02eaca8c785c645771b49fee06a285e80f51", "55e0b8d838ebc1319107aae4ddfebfd737219243133b4007212abc5f1836560b", "c3b2581f30075fd37abb2420a26cce49ef071efaf1361a9204de0a5aa7a181fb", "32998a17aab828ffa8a5ce6e84574a44794cb9cab1669a5e08ab31f6691aaa59", "20692a7c2cca8e43c3abe160e37ea0e641f5a033b5f79a576877f0c63c31e26e", "a76b91846ccf19fa450eced36b93e70383864a9498334259010bd0f6218fb547", "13fcc4927624770a96ff218466f967e4419b59b9e730a3d9e38c3045cd0a17e5", "aecb299598761fd91bb27b5120011b2a4bda360498322a10f3839fba0576ef06", "48a699afcae6f76f8da0bb5c9ec1596da259cc056b57df8c2d364139781cd1f5", "a642f247b5ed5051ca925538c6858fcb90e910c9b9848bd4cdc288a30bf6ce8c", "f560a8d1a6a81a3ae53eb216b9f21ceed89070dbb3334852d9ad23926df57210", "70ef877265c2a9e9ff4d71cfb6bf449ef2f856137e50168ffa5a7f3b91b8b2b9", "da49140327cd018075a67687c8ead9dda21b123b7657782ff80bd335ea37f0be", "4e31c4380bc6e2e95d52702312d146ef53c7cec2ddc9d3d45f22fd8e7953b707", "f9ac4b2dd490893c613a6188025e1cdcfa233173357b5f1d8f26a083eb170bc9", "a2aed91062c72321d95bc9b10ca0ab04bb86ce76bda6d7446c5af88574fbc981", "ac91c31366c37df69e62c97ccef06b72a95befdab007a611257387fe528b8fbf", "3e72c74406aa94dda464acd67ccd46a7205e09b77d8955b0f9678f5248b0eb8c", "ebc56a71c3d02dc32111680b323823d78f06a01f9c0805ff743135e4a203c043", "302f704d58eacbab04a1996902dcf513b2a1b775b9f06d6df1af0177635e170a", "7aa253568af6bb14a7ccaec271ad7792308db1e5fb93af142127a37c980f6e8e", "27b8c04f8ed1b1fdcce11de4e9c14fc0aa1a2c8edfc05202431bc91c8edae095", "1cd26ea4198fcd704527fca8055eb30edd3e6ad558684b89495a6586decf860a", "858d22f0ea578dee75d95bffb3a706592ebaaf8bca8299c507bdb9f7ba511d81", "44984b08556c480a7f287107cfaecc50a7b44af1978d4904da90e89d73c530f5", "52f6e6940c0bf2f0267c5c7d35d106a78c3073432fb80a4f28c79cfff6add3db", "8a1382361e67a7ba421b35225759e13b3e6190e42a137f74dc063f33012a5f21", "c000ec46c401fd458341179e4a8112d36fa8516685d3112b00a84d6159685e6a", "efd9a24e5b3dd6955bab7499385723c3d9f03dc0841c0a4688f7615a41ce23ac", "17297b444bb84ed415937d6aeb0c84c9c1c625498f8c16bbcd54eac151408944", "a46ec3d91dd6ba0da94473a4a6da054274e8e2c9c0a7552dab348a35cddf5f5b", "09b0ee9f55240e5d75004b7cbbe6e6156dc29d0a60537ccfad67c5adb81ed1af", "75eb229a88003eb6b798a08c0cda6ae87277c153eff714e8168b2ad645d0488a", "3c8771bf0f4bb2b5b45a8bea52d0497cfe2b646facc0df63a43ba69246682d47", "394f70aa2f0826b7249796829c5da8e23d9ead90b1c4174bb0bebd3f83d396ed", "d76b0240c698a8e648af82cf9c2855f061ed38823493f46736726a65c777865d", "0a2b077c44aa9ca51d79579c964322f624bfa421d103da3a0a44e2c3c762f3b1", "702318b83f51f50def9cccee119a85e93035b251f6b79b9ab49d391e92f4bf83", "8b30e4b2d90d27191ca26904dd2f921486f33ac5a9debd5c81e5a5707aabfaff", "061bf51c4130c6443291ee88e51c189d5c0124ff3b7ac96844b160e42af05bc4", "3021f156007b3259c46c5e8a1ce003061c28f8af272a204bcbb068929797e147", "dee44dc00ec3682d16cdc900ac67f6a7e446d9f4e2de4e740cce3e827de961c8", "5684260c67a20c7698c075d1ad8e548f0d82fe5e1702495173db27ad4e6f678c", "783859ca600ddee59c96eb8b5d917740407b5d2665e1412f6ccba749eab30e70", "5256d7664c9774dcad24df6dc18ec900af21546f3b030d77c562ad41dd46b14d", "22df6c633157413381fce63e341713b7b5dcc5015792ca180bd59ed5819bfacf", "1ccd6ded4e74d0a001a09e4ca5fd9205647da56111b3d1c8f7e5582fb9647174", "c5c73527574fdade82f7425cab00599574c349b348c0904623d00c9add16bb13", "9bd59d7e9da056a120a6933d36fbe48d7e54702608bea3d490cae289b3df97c7", "96db484e1a9d6ad281537ab6b7b59609c12c6729187b9d6f167323c06818fadb", "cf2a57d772798d3fb56adba3cc36766a77f5a7d91f50aef702f9dd7906e2ffec", "60f6318f76c1da1fb5ce2ee98de7321bc0166cca49f9ef496d83e7f2d8714bc5", "5c448e02e19304c7d0a0ce940548f8472b558519f20684dfb99017ad0ad837d6", "4bc8ef56c93de4d003204f2b9f08df6748764cf6aa75ee431c2bd3ede3608bf6", "01c832a6aedac47e77e24d50db0be7c236032782c5802acc54b58935682fd88b", "be298379703acdb139e608c3e5ddfa9f700963806231e147190d91ce3cf52a11", "ef1d280dfad07f7d9ef84af911344b042f8b80b12fbe191bda81b84501c5c4d9", "13bef3fc6c525e3a68cdad75f10b9e5ce68fcd154e6f95a13a5b23e11aef96a5", "d2efab63bb566b7ae013ace86cf7e426d5c265476b4516bdb52baf2974e74478", "6064aa869cf44c92c4698f86a8ab1ba1b24f7a6896c8536e91aa257d27365e4b", "c81d4ca2e415e1af8f96f5ca3e47b273200075970abe6cfc360367be44469d96", "b4dcafbe91d8901cb3fe39ef2827a99c7991e3f2afe8b9847c72bc71809e5582", "3019d1b3a9ca604c06ac86bd83133991b811160e700acea0ceefa56bd21b3d39", "51eddbc6d256af807ce657e92c676ad223881ad8d003dc5f3401b4bf0d54f70a", "da26b6d03e8248b121010bf9f67b24ca7486e344330f50cdc093951d922155fc", "e9c0cee171808101a1e695ed26f476b6eafbbfa7886bed3918cd70af59d2e006", "e0131f3e97982a4fc10c6580274fa4aa8870a2f7ab6a9dd9aadc01a05eecf930", "b3c07811ae9a5ea472ce9bd46c4cc651d537e8b90a2559d2df46b9948d49b9bf", "78615cbfa6f0fa582bba550f70dcb0f436bf2edcb554de28a70944114cfd2c27", "7f5120a14abeea5144448397dfafc86e6137bfddbd33d48fa5e84dc4bdf2473e", "766c9a099e89021a5c83701109f2ba8692d3dfbf54f96e32df546688e7eb3ebd", "4e9b2e75587a900ee843ae001098d69dcc5c5a0bad7e10df16207cc5d7d4dff2", "69a0350ba9ec79f8ffb9dbaeb3331e9b8849838b58d3a24787556721a4ed4424", "8c924e415a901863c97c46287df4b9e5529330ea8d3b788605b7ab2c7d2ba766", "d4227d62d902ecaa502b72876702a27bb91770b58fba693ce17caff776dbe979", "e82b47a23118b9ba33fce40d76431f698b20110eeb9991d34cb9b6ff5e550539", "35997bde16a109d527ab60f3a8ddc40f80f6f2268c121ce4ab222f54006c127f", "0cc7e1a152c44c731725c1d578a04ef1a03aba45f9442d137b9359856fcfc988", "467384dacf53d415ff487a79af4ba55202053182be49b5403138ef65f021c975", "53d175dd606e012bfb0175c2b401fcfe760a20b76c1c849784363e3b9d0be3f6", "037101c3fdb44821b8eaae571cc6ff707d71bb22ab2884774925e10aaa0b58d7", "cab09ee70dc12f8c83420f921f74d3800973666aa571bcea766256d78391f74a", "414a3c776c5c77c4aa36f7a01d5947dac113ceb508e9c65b892cbf3306fb15b2", "dc5b3f7be28ac3730b5add70c7e6d1571732c4e8b7bc6e34f78fa97f01f48f4e", "b686a3ad7ea721cc8339b914760fcf1018cbd2a5ba620e4a3d95601a57018456", "c34a0d4ea5209ac408b8a2aa8b553b3052c2e4853d21d777fc789e91eaf2ad0c", "3ae2624166390b714cefcb7f1947e6db2629c823aad2409c88a0b65d5df8e6c7", "656b058a812f499faf6080963684d5fa9cc1ef0408b4f6a7e66b41abaf7ad92f", "2b1814c003db3c66d33ac29ea98464cbe0e811034d2d70fc9b4fe178dec63947", "768b7e41d19d302a218e51efc821d6eef54a991d19495af55b5cc12733155a12", "2c452eb9ca79dbdca94c2139cad9b44630c7cc7fee93ba0e6d33afd4524300ad", "b85e3b0cd1ae2e1b22d6a2a617a7b4b201c9d44ecd422084c0e4536ade88ec34", "284b0078441d17ae86d02b15ef3c981271ceae12ee164fdf47fb6bf06c448922", "38b8f68cc3ac7096a489856186c8f1a891de6e2495fe6ab8022c7a0bd7ee95f5", "6f80d05fa5f6fe8c45f56d7d430a8e1c9c69848c65d3a7e76964a4c5f7a12e98", "d0e2232e2034f2f2b5f413e60bc02b624caab3109f5b747b6158a7df0492ec18", "bf58f5df327c884c9b7dedf10d93d764652560b60dd27c0a874441bfa15f26b4", "f54823d43f8b772eb6a098a0fd47fbbd47a461d77e1237fce5d43c1814553755", "200979c5b9a379061368bda0c2807b05e82ca7a0d3a1f3448ce1be41c341753b", "d419cf497e114c110b7178315732816f1eea358a2d02c9ec1f32f784a918f561", "838406e16a16373e9c61306d092a98ce2f3a862ef8ec325bf2e558b9479f6e35", "b93b6d2894c0055817bd9f4f7acf1befe9d102524e2f4c46b474a50e82d3abb1", "48baa5572e2244efe8ea5f8c1bc62d32bc1bfdfcb86b2f093217726b810ce0cd", "b8a2bf27b7316debf817a19ccc19477f4e14e9c5b6067eddb716e95133858c8f", "0f9eae6cd22081ad7870cd69f04b72fc447adafe5c7a96c6323c97882412d153", "4032450c23937ba85325a03a021dda527f6325e9fbacb4bb0de08684f0ba80fe", "22b7c403277a34adf00a14b9f2c086d4d76f2c6f8f9fc0fc2222d1a90fb26983", "65418a4bff2dc82e77bdb06edef50f9380f9708d8d0918f2418f345348982326", "e1b6bfdb4299b6bbea3cc545ae3050755b5e9f8ac03158f4f74470c2497a0e47", "87fc7bcd92330f1748eb7de8bbeba7eaed771ed945502e1be197993ac6dca42b", "89fe852d7f54f0e12b75f0f959df7c9ce9edf0623679831db4c595aee1075977", "dfb3f748dc697a84375891e40af34ac20e3064faafb8807fac3bb0830404aa35", "f352695b42c3ab5be3fdee6c1c071472b4b688ff003b1edb967410a2530b55f5", "89c485f21699b84b7b6527e1a4d98e878b4e6ed762670b857d65710ec0e4cdf2", "b8c293da1915c2668931c5f0cdbdb2b0063d9301aec06211ab8a3ad9766e4cc0", "3a823e7cddff96d21e15007223689ffd9b24733e8604447bf89513e66e59a4ba", "4d36abda2aadda71bcf34d98e369e5e668e323d68d10ce54b14990977d0fa787", "acd37e92f17a3874883b1b24fee21e6aa88409bbbca06610ef847e5bcc666add", "07ef24c414c5ad8505b9ca573fab0a3226c0f634e74f68d558474240e45d0ae0", "0ddf6ea4076bea9430ed3ce06dd5d0c0a085c93334b097065b3496427906d041", "79fd7999b0a95af5f51197cc720513de91f29e202c93689574f072f1cfa742e6", "f2d12815c3726f1222c174c82fbd9af9765bc9193e821253e427aa3949526beb", "a97f24402088b7862e877f855421961e87e876ce9485748138fc9b85886babd8", "e40792f8e03508634573b2eb006160706aa668adcd9670768cdc4956c60aa129", "d73b0285864ba44d2144e956cde12b7f7d0184a8ee695bcfc7ab50ee9d999337", "6f92be3b1c555c197cfd8aa31ed43810250b9ad81655aa3a3ce91ff90e59dfe8", "457a808b8baac23c0fb35a06d5e4e33ac27c174ee0531e71ecfac2b40bd1e577", "d228a01917c719f3550294dd00c5adff6bf7b904051d20359f2fe8cdffda9ddb", "34f435d5cd0f78a41377f0eb5aa559b5350b95e109b6ac11c00387f80d1dc103", "3a36330a85e4f47170311267e02f2c6ea3942d7b625df479a75352def58753c6", "2878efbcd559cb0135003d580bbdc711078c220125cc8ae7631d26beecda6ef3", "1c51b469514849abef2eec8b65021864693a0617b394b1892eaf2b87d2b97fe6"], APPKEY="majoodah-calendar";
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var DAY=864e5;
+function D(s){var p=s.split("-");return new Date(Date.UTC(+p[0],+p[1]-1,+p[2]))}
+function iso(d){return d.toISOString().slice(0,10)}
+function add(d,n){return new Date(d.getTime()+n*DAY)}
+var fH=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura-nu-arab",{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
+var fHd=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura-nu-arab",{day:"numeric",timeZone:"UTC"});
+var fHm=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura",{month:"long",timeZone:"UTC"});
+var fHdm=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura-nu-arab",{day:"numeric",month:"long",timeZone:"UTC"});
+var fG=new Intl.DateTimeFormat("ar-EG-u-nu-arab",{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
+var fGdm=new Intl.DateTimeFormat("ar-EG-u-nu-arab",{day:"numeric",month:"short",timeZone:"UTC"});
+var fGm=new Intl.DateTimeFormat("ar-EG",{month:"long",year:"numeric",timeZone:"UTC"});
+var fW=new Intl.DateTimeFormat("ar-SA",{weekday:"long",timeZone:"UTC"});
+var AN=function(n){return String(n).replace(/\d/g,function(c){return "٠١٢٣٤٥٦٧٨٩"[c]})};
+function today(){var n=new Date();return new Date(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate()))}
+var TODAY=today();
+/* اليوم داخل نطاق؟ */
+function inR(d,a,b){return d>=D(a)&&d<=D(b)}
+function offOn(d){for(var i=0;i<CAL.breaks.length;i++){var b=CAL.breaks[i];if(inR(d,b.from,b.to))return b}return null}
+function daysOn(d){var k=iso(d);return CAL.days.filter(function(x){return x.date===k})}
+/* بناء الأسابيع: كل فصل من أحد بدايته، الأسابيع الدراسية تُرقَّم، والأسبوع الذي كله إجازة يُعلَّم */
+function buildWeeks(){
+ var out=[];
+ CAL.terms.forEach(function(t,ti){
+  var s=D(t.start), e=D(t.end), n=0, rows=[];
+  for(var w=s; w<=e; w=add(w,7)){
+   var we=add(w,4), allOff=true, notes=[];
+   for(var k=0;k<5;k++){var dd=add(w,k); var b=offOn(dd); if(!b) allOff=false; else if(notes.indexOf(b.name)<0) notes.push(b.name);
+     daysOn(dd).forEach(function(x){ if(notes.indexOf(x.name)<0) notes.push(x.name) })}
+   if(!allOff) n++;
+   rows.push({term:ti,n:allOff?null:n,from:w,to:we,off:allOff,notes:notes});
+  }
+  out.push({t:t,rows:rows,count:n});
+ });
+ return out;
+}
+var WEEKS=buildWeeks();
+function curWeek(){for(var i=0;i<WEEKS.length;i++)for(var j=0;j<WEEKS[i].rows.length;j++){var r=WEEKS[i].rows[j];if(TODAY>=r.from&&TODAY<=add(r.from,6))return {term:WEEKS[i],row:r}}return null}
+function nextBreak(){var best=null;CAL.breaks.forEach(function(b){var f=D(b.from);if(f>TODAY&&(!best||f<D(best.from)))best=b});return best}
+/* ===== الحالة ===== */
+var ACTIVE=false, EV=[];
+try{EV=JSON.parse(localStorage.getItem("mj_cal_ev")||"[]")}catch(e){}
+function saveEv(){try{localStorage.setItem("mj_cal_ev",JSON.stringify(EV))}catch(e){}}
+function toast(t){var x=$("#toast");x.textContent=t;x.classList.add("show");clearTimeout(toast._);toast._=setTimeout(function(){x.classList.remove("show")},2200)}
+/* ===== العرض: اليوم ===== */
+function renderNow(){
+ var c=curWeek(), nb=nextBreak(), h=[];
+ h.push('<div class="now">');
+ h.push('<div class="stat hero"><small>اليوم</small><b>'+fW.format(TODAY)+'</b><span>'+fH.format(TODAY)+' · '+fG.format(TODAY)+'</span></div>');
+ if(c&&c.row.n){h.push('<div class="stat"><small>'+c.term.t.name+'</small><b>الأسبوع '+AN(c.row.n)+'</b><span>من '+AN(c.term.count)+' أسبوعاً دراسياً</span></div>')}
+ else if(c&&c.row.off){h.push('<div class="stat"><small>'+c.term.t.name+'</small><b>إجازة</b><span>'+c.row.notes.join('، ')+'</span></div>')}
+ else {h.push('<div class="stat"><small>العام الدراسي</small><b>خارج أيام الدراسة</b><span>'+CAL.title+'</span></div>')}
+ if(nb){var dn=Math.round((D(nb.from)-TODAY)/DAY);h.push('<div class="stat"><small>الإجازة القادمة</small><b>'+nb.name+'</b><span>بعد '+AN(dn)+' يوماً — '+fHdm.format(D(nb.from))+'</span></div>')}
+ var up=EV.filter(function(e){return D(e.d)>=TODAY}).sort(function(a,b){return a.d<b.d?-1:1})[0];
+ if(up){var du=Math.round((D(up.d)-TODAY)/DAY);h.push('<div class="stat"><small>أقرب مواعيدك</small><b>'+esc(up.t)+'</b><span>'+(du?'بعد '+AN(du)+' يوماً':'اليوم')+' — '+fHdm.format(D(up.d))+'</span></div>')}
+ h.push('</div>');
+ h.push('<h2 style="font-size:17px;margin-top:24px">الإجازات والمناسبات القادمة</h2><table class="w"><tr><th>المناسبة</th><th>من</th><th>إلى</th></tr>');
+ var items=CAL.breaks.map(function(b){return {n:b.name,f:b.from,t:b.to,k:"h"}}).concat(CAL.days.map(function(x){return {n:x.name,f:x.date,t:x.date,k:x.kind}}))
+  .filter(function(x){return D(x.t)>=TODAY}).sort(function(a,b){return a.f<b.f?-1:1}).slice(0,8);
+ items.forEach(function(x){h.push('<tr><td><span class="tag '+x.k+'">'+(x.k==="h"?"إجازة":x.k==="n"?"مناسبة وطنية":"تنبيه")+'</span> '+x.n+'</td><td>'+fHdm.format(D(x.f))+'<span class="hd">'+fGdm.format(D(x.f))+'</span></td><td>'+(x.t!==x.f?fHdm.format(D(x.t))+'<span class="hd">'+fGdm.format(D(x.t))+'</span>':'—')+'</td></tr>')});
+ if(!items.length)h.push('<tr><td colspan="3">لا توجد إجازات متبقية هذا العام.</td></tr>');
+ h.push('</table>');
+ $("#v-now").innerHTML=h.join("");
+}
+/* ===== توزيع الأسابيع ===== */
+function weekRow(r,cur){
+ var tags=r.notes.map(function(n){return '<span class="tag '+(r.off?'h':'m')+'">'+n+'</span>'}).join('');
+ return '<tr class="'+(r.off?'off':'')+(cur?' cur':'')+'"><td class="wk">'+(r.n?AN(r.n):'—')+'</td><td>'+fHdm.format(r.from)+'<span class="hd">'+fGdm.format(r.from)+'</span></td><td>'+fHdm.format(r.to)+'<span class="hd">'+fGdm.format(r.to)+'</span></td><td>'+(tags||'')+'</td></tr>';
+}
+function renderWeeks(){
+ var c=curWeek(), h=['<h2 style="font-size:18px">توزيع الأسابيع الدراسية — '+CAL.title+'</h2><p class="lead">الأحد إلى الخميس، بالتاريخين الهجري (أم القرى) والميلادي. الأسابيع الملوّنة بالأحمر إجازات كاملة ولا تُحسب في الترقيم.</p>'];
+ WEEKS.forEach(function(T){
+  h.push('<div class="term"><h2>'+T.t.name+' <span class="pill">'+AN(T.count)+' أسبوعاً</span></h2><table class="w"><tr><th>الأسبوع</th><th>من (الأحد)</th><th>إلى (الخميس)</th><th>ملاحظات</th></tr>');
+  T.rows.forEach(function(r){h.push(weekRow(r,c&&c.row===r))});
+  h.push('</table></div>');
+ });
+ $("#v-weeks").innerHTML=h.join("");
+}
+/* ===== التقويم الشهري ===== */
+function dayClass(d){
+ var c=[]; if(d.getUTCDay()===5||d.getUTCDay()===6)c.push("we");
+ if(offOn(d))c.push("h"); var x=daysOn(d); if(x.length)c.push(x[0].kind==="n"?"n":"m");
+ if(EV.some(function(e){return e.d===iso(d)}))c.push("m");
+ if(+d===+TODAY)c.push("today"); return c.join(" ");
+}
+function monthHTML(y,m){
+ var first=new Date(Date.UTC(y,m,1)), last=new Date(Date.UTC(y,m+1,0));
+ var h=['<div class="mon"><h3><span>'+fGm.format(first)+'</span><small>'+fHm.format(first)+' – '+fHm.format(last)+'</small></h3><div class="grid7">'];
+ ["أحد","إثن","ثلا","أرب","خمي","جمع","سبت"].forEach(function(n){h.push('<div class="dn">'+n+'</div>')});
+ for(var i=0;i<first.getUTCDay();i++)h.push('<div></div>');
+ for(var d=first; d<=last; d=add(d,1)){var tt=[];var b=offOn(d);if(b)tt.push(b.name);daysOn(d).forEach(function(x){tt.push(x.name)});EV.forEach(function(e){if(e.d===iso(d))tt.push(e.t)});
+  h.push('<div class="d '+dayClass(d)+'"'+(tt.length?' title="'+esc(tt.join(' · '))+'"':'')+'>'+AN(d.getUTCDate())+'<i>'+fHd.format(d)+'</i></div>')}
+ h.push('</div></div>'); return h.join("");
+}
+function monthsList(){var s=D(CAL.yearStart), e=D(CAL.yearEnd), out=[];for(var y=s.getUTCFullYear(),m=s.getUTCMonth(); new Date(Date.UTC(y,m,1))<=e; m++){if(m>11){m=0;y++}out.push([y,m])}return out}
+function renderMonths(){
+ var h=['<h2 style="font-size:18px">التقويم الشهري</h2><div class="legend"><span style="--c:var(--hol-soft)">إجازة</span><span style="--c:var(--nat-soft)">مناسبة وطنية</span><span style="--c:var(--must-soft)">تنبيه أو موعدك</span></div><div class="months">'];
+ monthsList().forEach(function(x){h.push(monthHTML(x[0],x[1]))});
+ h.push('</div>'); $("#v-months").innerHTML=h.join("");
+}
+/* ===== مواعيدي ===== */
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var KN={m:"موعد",x:"اختبار",t:"تسليم"};
+function renderMine(){
+ var l=$("#evList"); EV.sort(function(a,b){return a.d<b.d?-1:1});
+ l.innerHTML=EV.length?EV.map(function(e,i){return '<div class="ev"><span class="tag m">'+KN[e.k]+'</span><b>'+esc(e.t)+'</b><span class="num">'+fHdm.format(D(e.d))+' · '+fGdm.format(D(e.d))+'</span><button class="btn small" data-del="'+i+'" aria-label="حذف">حذف</button></div>'}).join(""):'<div class="empty">لا مواعيد بعد. أضف أول موعد من النموذج أعلاه.</div>';
+}
+$("#evForm").addEventListener("submit",function(e){e.preventDefault();var t=$("#evT").value.trim(),d=$("#evD").value;if(!t||!d)return;EV.push({t:t,d:d,k:$("#evK").value});saveEv();$("#evT").value="";renderAll();toast("أُضيف الموعد")});
+$("#evList").addEventListener("click",function(e){var b=e.target.closest("[data-del]");if(!b)return;EV.splice(+b.dataset.del,1);saveEv();renderAll()});
+/* ===== تبويبات ===== */
+function show(v){$$(".tab").forEach(function(t){t.setAttribute("aria-selected",t.dataset.v===v?"true":"false")});$$(".view").forEach(function(s){s.hidden=s.id!=="v-"+v});try{history.replaceState(null,"","#"+v)}catch(e){}}
+$$(".tab").forEach(function(t){t.addEventListener("click",function(){show(t.dataset.v)})});
+/* ===== الطباعة ===== */
+function renderPrint(){
+ var h=[], wm=ACTIVE?'':'<div class="wm">معاينة — مجودة</div>';
+ h.push('<div class="pp">'+wm+'<div class="ph"><div><h1>توزيع الأسابيع الدراسية — '+CAL.title+'</h1><small>الأحد إلى الخميس · هجري (أم القرى) وميلادي</small></div><small>majoodah.com</small></div><table class="pw"><tr><th>الفصل</th><th>الأسبوع</th><th>من</th><th>إلى</th><th>ملاحظات</th></tr>');
+ WEEKS.forEach(function(T){T.rows.forEach(function(r,i){h.push('<tr class="'+(r.off?'off':'')+'">'+(i===0?'<td class="tm" rowspan="'+T.rows.length+'">'+T.t.name+'</td>':'')+'<td>'+(r.n?AN(r.n):'—')+'</td><td>'+fHdm.format(r.from)+' — '+fGdm.format(r.from)+'</td><td>'+fHdm.format(r.to)+' — '+fGdm.format(r.to)+'</td><td>'+r.notes.join('، ')+'</td></tr>')})});
+ h.push('</table><div class="pfoot"><span>'+CAL.source+'</span><span>متجر مجُودة · majoodah.com</span></div></div>');
+ h.push('<div class="pp">'+wm+'<div class="ph"><div><h1>التقويم الشهري — '+CAL.title+'</h1><small>الإجازات بالأحمر · المناسبات الوطنية بالأخضر · مواعيدك بالذهبي</small></div><small>majoodah.com</small></div><div class="pm">');
+ monthsList().forEach(function(x){h.push(monthHTML(x[0],x[1]))});
+ h.push('</div>');
+ if(EV.length){h.push('<h3 style="font-size:12px;margin-top:8px;color:#0a6d73">مواعيدي</h3><table class="pw"><tr><th>الموعد</th><th>التاريخ</th></tr>'+EV.map(function(e){return '<tr><td>'+KN[e.k]+': '+esc(e.t)+'</td><td>'+fHdm.format(D(e.d))+' — '+fGdm.format(D(e.d))+'</td></tr>'}).join('')+'</table>')}
+ h.push('</div>');
+ $("#printArea").innerHTML=h.join("");
+}
+window.addEventListener("beforeprint",renderPrint);
+$("#btnPrint").addEventListener("click",function(){if(!ACTIVE){openAct();toast("الطباعة بلا علامة بعد التفعيل — تُطبع الآن بعلامة «معاينة»")}renderPrint();setTimeout(function(){window.print()},ACTIVE?50:900)});
+/* ===== ملف تقويم الجوال ICS ===== */
+function icsEsc(s){return String(s).replace(/[\\;,]/g,function(c){return "\\"+c}).replace(/\n/g,"\\n")}
+function icsDate(d){return iso(d).replace(/-/g,"")}
+$("#btnIcs").addEventListener("click",function(){
+ if(!ACTIVE){openAct();return}
+ var L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Majoodah//School Calendar 1448//AR","CALSCALE:GREGORIAN","X-WR-CALNAME:التقويم الدراسي 1448"],n=0;
+ function ev(name,f,t,cat){n++;L.push("BEGIN:VEVENT","UID:mj-cal-"+n+"-"+f+"@majoodah.com","DTSTAMP:20261016T000000Z","DTSTART;VALUE=DATE:"+icsDate(D(f)),"DTEND;VALUE=DATE:"+icsDate(add(D(t),1)),"SUMMARY:"+icsEsc(name),"CATEGORIES:"+cat,"TRANSP:TRANSPARENT","END:VEVENT")}
+ CAL.breaks.forEach(function(b){ev(b.name,b.from,b.to,"إجازة")});
+ CAL.days.forEach(function(x){ev(x.name,x.date,x.date,"مناسبة")});
+ CAL.terms.forEach(function(t){ev("بداية "+t.name,t.start,t.start,"دراسة");ev("نهاية "+t.name,t.end,t.end,"دراسة")});
+ EV.forEach(function(e){ev(KN[e.k]+": "+e.t,e.d,e.d,"مواعيدي")});
+ L.push("END:VCALENDAR");
+ var blob=new Blob([L.join("\r\n")],{type:"text/calendar;charset=utf-8"}),a=document.createElement("a");
+ a.href=URL.createObjectURL(blob);a.download="التقويم-الدراسي-1448.ics";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+ toast("افتح الملف من جوالك لإضافة "+AN(n)+" موعداً لتقويمك");
+});
+/* ===== التفعيل ===== */
+function sha(s){return crypto.subtle.digest("SHA-256",new TextEncoder().encode(s)).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return ("0"+x.toString(16)).slice(-2)}).join("")})}
+function norm(c){var s=String(c||"").toUpperCase(),m=s.match(/CAL[\s\-_]*([A-Z0-9]{4})[\s\-_]*([A-Z0-9]{4})/);return m?("CAL"+m[1]+m[2]):s.replace(/[^A-Z0-9]/g,"")}
+function setActive(v){ACTIVE=v;var b=$("#btnAct");b.textContent=v?"✓ مُفعّل":"تفعيل";b.classList.toggle("on",v)}
+function openAct(){$("#actPanel").hidden=false;$("#actMsg").textContent=ACTIVE?"مُفعّل على هذا المتصفح.":"";$("#actMsg").className="msg"+(ACTIVE?" ok":"");window.scrollTo(0,0);setTimeout(function(){$("#actCode").focus()},50)}
+$("#btnAct").addEventListener("click",openAct);$("#actClose").addEventListener("click",function(){$("#actPanel").hidden=true});
+$("#actForm").addEventListener("submit",function(e){e.preventDefault();var c=norm($("#actCode").value),m=$("#actMsg");
+ if(c.length<8){m.className="msg err";m.textContent="اكتب الكود كاملاً كما وصلك، مثل CAL-7K3P-Q9WM.";return}
+ sha(APPKEY+":"+c).then(function(h){if(HASHES.indexOf(h)>=0){try{localStorage.setItem("mj_cal_act",h)}catch(e){}setActive(true);m.className="msg ok";m.textContent="تم التفعيل. تقدر الآن تطبع وتضيف الإجازات لتقويم جوالك.";toast("تم التفعيل");setTimeout(function(){$("#actPanel").hidden=true},1500)}else{m.className="msg err";m.textContent="الكود غير صحيح. تأكد من كتابته كما وصلك في رسالة الطلب."}}).catch(function(){m.className="msg err";m.textContent="افتح الصفحة في متصفح حديث لإتمام التفعيل."})});
+try{var h0=localStorage.getItem("mj_cal_act");if(h0&&HASHES.indexOf(h0)>=0)setActive(true)}catch(e){}
+/* ===== تشغيل ===== */
+function renderAll(){renderNow();renderWeeks();renderMonths();renderMine()}
+$("#srcNote").textContent="المصدر: "+CAL.source+". التواريخ الهجرية بتقويم أم القرى.";
+renderAll();
+var hv=(location.hash||"").slice(1); if(["now","weeks","months","mine"].indexOf(hv)>=0) show(hv);
+})();
+</script>
+
+</body>
+</html>
