@@ -8,13 +8,13 @@
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Alexandria:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Baloo+Bhaijaan+2:wght@600;700;800&display=swap">
 <style>
 :root{
   --ink:#0b3d40; --muted:#5b7476; --line:#d9e6e6; --paper:#f5f9f8; --card:#ffffff;
   --teal:#0a6d73; --teal-2:#16787c; --teal-soft:#e3f1f0; --must:#c9891f; --must-soft:#fbf1df;
   --hol:#b4413a; --hol-soft:#fbe9e7; --nat:#1f7a43; --nat-soft:#e4f4ea;
-  --f-display:"Alexandria","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --f-display:"Baloo Bhaijaan 2","IBM Plex Sans Arabic",Tahoma,sans-serif;
   --f-body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,"Geeza Pro",sans-serif; --r:14px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
@@ -123,6 +123,11 @@ table.w tr.off td{background:var(--hol-soft);color:var(--hol)}
   .wm{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;font-size:90px;color:rgba(10,109,115,.10);transform:rotate(-30deg);font-family:var(--f-display);pointer-events:none}
   .pfoot{font-size:9px;color:#666;margin-top:6px;display:flex;justify-content:space-between}
 }
+
+/* سهم القوائم المنسدلة — موحّد في منتجات مجودة */
+select{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%236b8486' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-size:11px 8px!important;padding-inline-end:30px!important;text-overflow:ellipsis;cursor:pointer}
+select:dir(rtl){background-position:left 11px center!important}select:dir(ltr){background-position:right 11px center!important}
+select::-ms-expand{display:none}
 </style>
 </head>
 <body>
