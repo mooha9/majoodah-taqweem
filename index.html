@@ -91,6 +91,10 @@ table.w tr.off td{background:var(--hol-soft);color:var(--hol)}
 .ev{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
 .ev b{flex:1}
 .empty{color:var(--muted);text-align:center;padding:26px;border:1px dashed var(--line);border-radius:var(--r)}
+.pbar{display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin-top:14px}
+.pbar label{font-size:13px;color:var(--muted);font-weight:500}
+.pbar select,.pbar input{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:6px 11px}
+.pbar input{flex:1;min-width:200px}
 /* activation */
 .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-top:16px}
 .panel form{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
@@ -168,6 +172,7 @@ select::-ms-expand{display:none}
   <button class="btn primary">إضافة</button>
  </form>
  <div class="list" id="evList"></div>
+ <div class="pbar no-print"><label for="optEmpty">قسم «مواعيدي» في الطباعة إن لم تُضف مواعيد</label><select id="optEmpty"><option value="hide">يُخفى من الطباعة</option><option value="msg">يظهر مع عبارة</option><option value="blank">يظهر فارغاً بلا أي كلام (أسطر للكتابة)</option></select><input id="optEmptyMsg" placeholder="اكتب العبارة التي تظهر" aria-label="العبارة التي تظهر في القسم الفارغ"></div>
 </section>
 <p class="src no-print" id="srcNote"></p>
 </div>
@@ -186,12 +191,12 @@ function iso(d){return d.toISOString().slice(0,10)}
 function add(d,n){return new Date(d.getTime()+n*DAY)}
 var fH=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura-nu-arab",{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
 var fHd=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura-nu-arab",{day:"numeric",timeZone:"UTC"});
-var fHm=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura",{month:"long",timeZone:"UTC"});
+var fHm=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura-nu-arab",{month:"long",timeZone:"UTC"});
 var fHdm=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura-nu-arab",{day:"numeric",month:"long",timeZone:"UTC"});
 var fG=new Intl.DateTimeFormat("ar-EG-u-nu-arab",{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
 var fGdm=new Intl.DateTimeFormat("ar-EG-u-nu-arab",{day:"numeric",month:"short",timeZone:"UTC"});
-var fGm=new Intl.DateTimeFormat("ar-EG",{month:"long",year:"numeric",timeZone:"UTC"});
-var fW=new Intl.DateTimeFormat("ar-SA",{weekday:"long",timeZone:"UTC"});
+var fGm=new Intl.DateTimeFormat("ar-EG-u-nu-arab",{month:"long",year:"numeric",timeZone:"UTC"});
+var fW=new Intl.DateTimeFormat("ar-SA-u-nu-arab",{weekday:"long",timeZone:"UTC"});
 var AN=function(n){return String(n).replace(/\d/g,function(c){return "٠١٢٣٤٥٦٧٨٩"[c]})};
 function today(){var n=new Date();return new Date(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate()))}
 var TODAY=today();
@@ -222,6 +227,20 @@ function nextBreak(){var best=null;CAL.breaks.forEach(function(b){var f=D(b.from
 var ACTIVE=false, EV=[];
 try{EV=JSON.parse(localStorage.getItem("mj_cal_ev")||"[]")}catch(e){}
 function saveEv(){try{localStorage.setItem("mj_cal_ev",JSON.stringify(EV))}catch(e){}}
+/* خيار القسم الفارغ في الطباعة — الافتراضي الإخفاء كما كان */
+var OPT={empty:"hide",emptyMsg:"لا توجد مواعيد مضافة."};
+try{OPT=Object.assign(OPT,JSON.parse(localStorage.getItem("mj_cal_opt")||"{}"))}catch(e){}
+function saveOpt(){try{localStorage.setItem("mj_cal_opt",JSON.stringify(OPT))}catch(e){}}
+function syncOpt(){$("#optEmpty").value=OPT.empty;$("#optEmptyMsg").value=OPT.emptyMsg;$("#optEmptyMsg").hidden=OPT.empty!=="msg"}
+$("#optEmpty").addEventListener("change",function(){OPT.empty=this.value;saveOpt();syncOpt()});
+$("#optEmptyMsg").addEventListener("input",function(){OPT.emptyMsg=this.value;saveOpt()});
+syncOpt();
+/* ===== الأرقام العربية على كل نص ظاهر (عند العرض فقط) ===== */
+var AR="٠١٢٣٤٥٦٧٨٩";
+function skipTx(n){for(var p=n.parentNode;p&&p.nodeType===1;p=p.parentNode){var t=p.tagName;if(t==="SCRIPT"||t==="STYLE"||t==="TEXTAREA"||p.id==="actPanel"||p.getAttribute("dir")==="ltr")return true}return false}
+function tx(n){if(!/[0-9]/.test(n.nodeValue)||skipTx(n))return;n.nodeValue=n.nodeValue.replace(/[0-9]/g,function(d){return AR[d]})}
+function txAll(root){var w=document.createTreeWalker(root||document.body,NodeFilter.SHOW_TEXT),n;while((n=w.nextNode()))tx(n)}
+try{new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==="characterData")tx(m.target);else Array.prototype.forEach.call(m.addedNodes,function(a){if(a.nodeType===3)tx(a);else if(a.nodeType===1)txAll(a)})})}).observe(document.body,{subtree:true,childList:true,characterData:true})}catch(e){}
 function toast(t){var x=$("#toast");x.textContent=t;x.classList.add("show");clearTimeout(toast._);toast._=setTimeout(function(){x.classList.remove("show")},2200)}
 /* ===== العرض: اليوم ===== */
 function renderNow(){
@@ -300,6 +319,7 @@ function renderPrint(){
  h.push('<div class="pp">'+wm+'<div class="ph"><div><h1>التقويم الشهري — '+CAL.title+'</h1><small>الإجازات بالأحمر · المناسبات الوطنية بالأخضر · مواعيدك بالذهبي</small></div><small>majoodah.com</small></div><div class="pm">');
  monthsList().forEach(function(x){h.push(monthHTML(x[0],x[1]))});
  h.push('</div>');
+ if(!EV.length&&OPT.empty!=="hide"){h.push('<h3 style="font-size:12px;margin-top:8px;color:#0a6d73">مواعيدي</h3><table class="pw"><tr><th>الموعد</th><th>التاريخ</th></tr>'+(OPT.empty==="msg"?'<tr><td colspan="2">'+esc(OPT.emptyMsg||"")+'</td></tr>':[1,2,3,4,5].map(function(){return '<tr><td style="height:16px"></td><td style="width:38%"></td></tr>'}).join(''))+'</table>')}
  if(EV.length){h.push('<h3 style="font-size:12px;margin-top:8px;color:#0a6d73">مواعيدي</h3><table class="pw"><tr><th>الموعد</th><th>التاريخ</th></tr>'+EV.map(function(e){return '<tr><td>'+KN[e.k]+': '+esc(e.t)+'</td><td>'+fHdm.format(D(e.d))+' — '+fGdm.format(D(e.d))+'</td></tr>'}).join('')+'</table>')}
  h.push('</div>');
  $("#printArea").innerHTML=h.join("");
@@ -335,7 +355,7 @@ try{var h0=localStorage.getItem("mj_cal_act");if(h0&&HASHES.indexOf(h0)>=0)setAc
 /* ===== تشغيل ===== */
 function renderAll(){renderNow();renderWeeks();renderMonths();renderMine()}
 $("#srcNote").textContent="المصدر: "+CAL.source+". التواريخ الهجرية بتقويم أم القرى.";
-renderAll();
+renderAll();txAll();
 var hv=(location.hash||"").slice(1); if(["now","weeks","months","mine"].indexOf(hv)>=0) show(hv);
 })();
 </script>
